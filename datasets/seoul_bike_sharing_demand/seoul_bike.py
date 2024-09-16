@@ -33,7 +33,7 @@ def get_dataset():
     eda.print_correlation_matrix(data.drop(columns=['Date', 'Seasons', 'Holiday', 'Functioning Day']))
 
     # Group analysis of data
-    eda.group_analysis(data, ['Seasons', 'Holiday', 'Hour', 'Temperature(°C)'],
+    eda.group_analysis(data, ['Seasons', 'Holiday', 'Hour', 'Temperature(C)'],
                        'Rented Bike Count')
 
     # Describe the data
@@ -47,7 +47,6 @@ def get_dataset():
 
     print("____________________________")
 
-    print(data.head())
     return data.drop(columns='Date')
 
 

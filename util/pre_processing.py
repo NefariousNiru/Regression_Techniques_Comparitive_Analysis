@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
@@ -36,7 +37,7 @@ def scale(data):
     return data
 
 
-def drop_outliers(data):
+def drop_outliers_inter_quartile(data):
     numeric_columns = data.select_dtypes(include=['float64', 'int64']).columns
 
     for column in numeric_columns:
@@ -51,5 +52,19 @@ def drop_outliers(data):
 
         # Filter the data to remove outliers
         data = data[(data[column] >= lower_bound) & (data[column] <= upper_bound)]
+
+    return data
+
+def drop_outliers_zscore(data, threshold=3):
+    numeric_columns = data.select_dtypes(include=['float64', 'int64']).columns
+
+    for column in numeric_columns:
+        # Calculate the Z-score for each value in the column
+        col_mean = data[column].mean()
+        col_std = data[column].std()
+        z_scores = (data[column] - col_mean) / col_std
+
+        # Filter the data to remove rows where Z-score is above the threshold
+        data = data[np.abs(z_scores) <= threshold]
 
     return data
