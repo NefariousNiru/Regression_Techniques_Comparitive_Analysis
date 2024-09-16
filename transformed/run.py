@@ -78,10 +78,11 @@ def run_boston_housing():
     boston_data_no_outliers = util.pre_processing.drop_outliers(boston_data)
     execute(boston_data_no_outliers, 'MEDV')
 
+
 def run():
-    # run_auto_mpg()
+    run_auto_mpg()
     # run_forest_fires()
     # run_seoul_bike()
-    run_boston_housing()
+    # run_boston_housing()
 
 run()

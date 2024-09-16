@@ -1,3 +1,8 @@
+Create a virtual environment
+`python -m venv venv`
+- On windows : `venv\Scripts\activate`
+- On linux: `source venv/bin/activate`
+
 Install package dependencies using
 `pip install -r requirements.txt`
 
