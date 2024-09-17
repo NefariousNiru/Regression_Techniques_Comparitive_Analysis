@@ -44,7 +44,7 @@ def execute(data, y_label):
 
     # Display the feature selection results
     metrics_df = pd.DataFrame.from_dict(results, orient='index')
-    with pd.option_context('display.max_columns', None):
+    with pd.option_context('display.max_columns', None, 'display.max_rows', None, 'display.max_colwidth', None):
         print(metrics_df)
 
 
