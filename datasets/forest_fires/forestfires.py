@@ -26,7 +26,7 @@ def get_dataset():
     data = pre_processing.clean_data(data)
 
     # Print correlation matrix without brand column
-    eda.print_correlation_matrix(data.drop(columns=['month', 'day']))
+    eda.print_correlation_matrix(data.drop(columns=['month', 'day']), 'Forest Fires')
 
     # Group analysis of data
     eda.group_analysis(data, ['month', 'day', 'rain', 'X', 'Y'], 'area')

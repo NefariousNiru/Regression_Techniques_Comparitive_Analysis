@@ -30,7 +30,7 @@ def get_dataset():
     data = pre_processing.clean_data(data)
 
     # Print correlation matrix
-    eda.print_correlation_matrix(data.drop(columns=['Date', 'Seasons', 'Holiday', 'Functioning Day']))
+    eda.print_correlation_matrix(data.drop(columns=['Date', 'Seasons', 'Holiday', 'Functioning Day']), "Seoul Bike Demand")
 
     # Group analysis of data
     eda.group_analysis(data, ['Seasons', 'Holiday', 'Hour', 'Temperature(C)'],

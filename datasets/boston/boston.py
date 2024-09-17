@@ -26,7 +26,7 @@ def get_dataset():
     data = pre_processing.clean_data(data)
 
     # Print correlation matrix
-    eda.print_correlation_matrix(data)
+    eda.print_correlation_matrix(data, 'Boston Housing')
 
     # Group analysis of data (you may want to specify which columns are categorical for group analysis)
     eda.group_analysis(data, ['CHAS', 'RAD'], 'MEDV')  # Example using 'CHAS' and 'RAD' as categorical columns

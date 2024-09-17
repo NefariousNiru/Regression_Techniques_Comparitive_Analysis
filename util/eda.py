@@ -3,12 +3,12 @@ import pandas as pd
 import seaborn as sns
 
 
-def print_correlation_matrix(data):
+def print_correlation_matrix(data, dataset_name):
     correlation_matrix = data.corr()
     # Plot correlation heatmap
     plt.figure(figsize=(16, 12))
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
-    plt.title("Correlation Matrix of Auto MPG Dataset")
+    plt.title(f"Correlation Matrix of {dataset_name} Dataset")
     plt.show()
 
 

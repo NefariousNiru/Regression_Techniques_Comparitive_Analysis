@@ -31,7 +31,7 @@ def get_dataset():
     data = replace_car_names_to_brand(data)
 
     # Print correlation matrix without brand column
-    eda.print_correlation_matrix(data.drop(columns='brand'))
+    eda.print_correlation_matrix(data.drop(columns='brand'), "Auto MPG")
 
     # Group analysis of data
     eda.group_analysis(data, ['brand', 'cylinders', 'model_year', 'origin'], 'mpg')
