@@ -16,7 +16,7 @@ def get_dataset():
 
     file_path = os.path.join(os.path.dirname(__file__), 'SeoulBikeData.csv')
     data = load.dataset(file_path, columns, None, 1)
-    print(data.head())
+
     print("____________________________")
     print("Exploratory Data Analysis for Seoul Bike Data")
 
