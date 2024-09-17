@@ -16,6 +16,6 @@ Regression Models
     - symbolic
     - transformed
 
-- util (utility methods)
+- util (utility methods - eda, pre_processing, loading, metrics)
 
 All regression models contain `run.py` which is the entry point for the application
