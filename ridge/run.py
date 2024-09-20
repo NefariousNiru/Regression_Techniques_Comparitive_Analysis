@@ -13,7 +13,7 @@ from regression import ridge_regression_model
 
 
 def feature_auto_mpg():
-    dataset = auto_mpg.get_dataset()
+    dataset = auto_mpg.get_dataset().drop(columns='brand')
 
     x = dataset.drop('mpg', axis=1)
     y = dataset['mpg']
