@@ -4,44 +4,22 @@ from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from gplearn.genetic import SymbolicRegressor
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import matplotlib.pyplot as plt
+from datasets.auto_mpg import auto_mpg
+from datasets.forest_fires import forestfires
+from datasets.seoul_bike_sharing_demand import seoul_bike
+from datasets.boston import boston
 
+# Function to calculate adjusted R-squared
 def adjusted_r_squared(r_squared, n, p):
-    """
-    Calculate adjusted R-squared.
-    :param r_squared: The R-squared value
-    :param n: Number of observations
-    :param p: Number of predictors
-    :return: Adjusted R-squared value
-    """
     return 1 - (1 - r_squared) * (n - 1) / (n - p - 1)
 
-# Function to perform symbolic regression on a dataset and evaluate quality of fit
-def symbolic_regression(file_path, target_column):
-    # Load the dataset, making sure to handle non-numeric columns like 'Date'
-    data = pd.read_csv(file_path)
-
-    # Drop rows with NaN values (you could handle missing values differently if preferred)
-    data.dropna(inplace=True)
-
-    # Convert only the numeric columns to proper numeric types
-    numeric_columns = data.select_dtypes(include=[np.number]).columns
-    data[numeric_columns] = data[numeric_columns].apply(pd.to_numeric, errors='coerce')
-
-    # One-hot encode categorical columns
-    data = pd.get_dummies(data, drop_first=True)
-
-    # Drop rows that may have been coerced to NaN after conversion
-    data.dropna(inplace=True)
-
-    # Ensure the target column is numeric
-    if target_column not in numeric_columns:
-        raise ValueError(f'Target column "{target_column}" is not numeric.')
-
+# Function to perform symbolic regression and evaluate quality of fit
+def symbolic_regression(data, target_column):
     # Features (X) and target (y)
-    X = data.drop(columns=target_column).values
+    X = data.drop(columns=[target_column]).values
     y = data[target_column].values
 
-    # In-Sample Fit
+    # Define the symbolic regressor
     est_gp = SymbolicRegressor(population_size=5000,
                                generations=30,
                                tournament_size=20,
@@ -106,11 +84,27 @@ def symbolic_regression(file_path, target_column):
     # Print the best symbolic expression found
     print(f'Best expression: {est_gp._program}')
 
-# Replace with your dataset file path relative to the project directory
-file_path = './data/your_dataset.csv'
+# Function to run symbolic regression on all datasets
+def run_all_datasets():
+    # Auto MPG dataset
+    print("Auto MPG Dataset")
+    auto_mpg_data = auto_mpg.get_dataset().drop(columns='brand')  # Adjust for correct target
+    symbolic_regression(auto_mpg_data, target_column='mpg')  # Example target column for auto_mpg
 
-# Replace with your target column name
-target_column = "target_column_name"
+    # Forest Fires dataset
+    print("\nForest Fires Dataset")
+    forest_fires_data = forestfires.get_dataset()
+    symbolic_regression(forest_fires_data, target_column='area')  # Example target column for forest fires
 
-# Perform symbolic regression
-symbolic_regression(file_path, target_column)
+    # Seoul Bike Sharing dataset
+    print("\nSeoul Bike Sharing Dataset")
+    seoul_bike_data = seoul_bike.get_dataset()
+    symbolic_regression(seoul_bike_data, target_column='rented_bike_count')  # Example target column for Seoul bike
+
+    # Boston Housing dataset
+    print("\nBoston Housing Dataset")
+    boston_data = boston.get_dataset()
+    symbolic_regression(boston_data, target_column='medv')  # Example target column for Boston dataset
+
+# Run symbolic regression on all datasets
+run_all_datasets()
