@@ -1,10 +1,9 @@
-import pandas as pd
-import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import cross_val_score
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 def predvactual(y_test, y_test_pred, model_name):
     plt.figure(figsize=(12, 8))
     sns.scatterplot(x=y_test, y=y_test_pred, color="orange")
@@ -13,6 +12,7 @@ def predvactual(y_test, y_test_pred, model_name):
     plt.xlabel('Actual')
     plt.title(f'{model_name} - Predicted vs Actual')
     plt.show()
+
 def linear_regression_model(x_train, x_test, y_train, y_test):
     lr = LinearRegression()
     lr.fit(x_train, y_train)
@@ -32,8 +32,8 @@ def linear_regression_model(x_train, x_test, y_train, y_test):
     print("Test R-squared:", valid_rsquared)
     
     predvactual(y_test, y_test_pred, 'Linear Regression')
-    
     return lr
+
 def cross_validation_scores(lr, x, y):
     crossval_scores = cross_val_score(lr, x, y, cv=5)
     cv_rmse = (-crossval_scores.mean())**0.5

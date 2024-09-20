@@ -1,19 +1,12 @@
-import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 from datasets.auto_mpg import auto_mpg
 from datasets.forest_fires import forestfires
 from datasets.seoul_bike_sharing_demand import seoul_bike
 from datasets.boston import boston
-from sklearn.preprocessing import StandardScaler
-from scipy import stats
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
-import seaborn as sns
 from regression import linear_regression_model, cross_validation_scores
 
 def feature_auto_mpg():
-    dataset = auto_mpg.get_dataset()
+    dataset = auto_mpg.get_dataset().drop(columns="brand")
 
     x = dataset.drop('mpg', axis=1)
     y = dataset['mpg']
@@ -36,6 +29,7 @@ def feature_boston_housing():
     x = data.drop('MEDV', axis=1)
     y = data['MEDV']
     return x, y
+
 def run_auto_mpg():
     x, y = feature_auto_mpg()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
