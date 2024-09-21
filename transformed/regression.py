@@ -20,6 +20,8 @@ def logarithmic(X, y, X_train, X_test, y_train, y_test, result):
     result["Logarithmic Regression (Train)"] = performance_metrics.get_all(y_train, y_train_pred_log)
     result["Logarithmic Regression (Test)"] = performance_metrics.get_all(y_test, y_test_pred_log)
 
+    performance_metrics.predvactual(np.squeeze(y_test), np.squeeze(y_test_pred_log), "Logarithmic")
+
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     mse = -cross_val_score(in_sample_log_reg, X, np.log1p(y), cv=kf, scoring='neg_mean_squared_error')
     r2 = cross_val_score(in_sample_log_reg, X, np.log1p(y), cv=kf, scoring='r2')
@@ -44,6 +46,8 @@ def square_root(X, y, X_train, X_test, y_train, y_test, result):
     y_test_pred_sqrt = sqrt_reg.predict(X_test) ** 2
     result["Square Root Regression (Train)"] = performance_metrics.get_all(y_train, y_train_pred_sqrt)
     result["Square Root Regression (Test)"] = performance_metrics.get_all(y_test, y_test_pred_sqrt)
+
+    performance_metrics.predvactual(np.squeeze(y_test), np.squeeze(y_test_pred_sqrt), "Square Root")
 
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     mse = -cross_val_score(in_sample_reg, X, y, cv=kf, scoring='neg_mean_squared_error')
@@ -70,6 +74,8 @@ def reciprocal(X, y, X_train, X_test, y_train, y_test, result):
     y_test_pred_reciprocal = 1 / reciprocal_reg.predict(X_test)
     result["Reciprocal Regression (Train)"] = performance_metrics.get_all(y_train, y_train_pred_reciprocal)
     result["Reciprocal Regression (Test)"] = performance_metrics.get_all(y_test, y_test_pred_reciprocal)
+
+    performance_metrics.predvactual(np.squeeze(y_test), np.squeeze( y_test_pred_reciprocal), "Reciprocal")
 
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     mse = -cross_val_score(in_sample_reciprocal_reg, X, 1 / (y + 1e-9), cv=kf, scoring='neg_mean_squared_error')
@@ -103,6 +109,8 @@ def box_cox(X, y, X_train, X_test, y_train, y_test, result):
     y_test_pred = yeo_johnson_transformer.inverse_transform(y_test_pred_transformed).flatten()
     result["Yeo-Johnson Regression (Train)"] = performance_metrics.get_all(y_train.flatten(), y_train_pred)
     result["Yeo-Johnson Regression (Test)"] = performance_metrics.get_all(y_test.flatten(), y_test_pred)
+
+    performance_metrics.predvactual(np.squeeze(y_test), np.squeeze(y_test_pred), "Box Cox")
 
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     mse = -cross_val_score(in_sample_yeo_johnson_reg, X, y_transformed, cv=kf, scoring='neg_mean_squared_error')

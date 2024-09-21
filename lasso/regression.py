@@ -29,3 +29,6 @@ def lasso(X, y, X_train, X_test, y_train, y_test, result, iter=1000):
         'R²': f"{np.mean(r2):.5f}",
         'RMSE': f"{np.mean(rmse):.5f}",
     }
+
+    performance_metrics.predvactual(np.squeeze(y_test), y_test_pred, "Lasso")
+

@@ -70,8 +70,12 @@ def symbolic_regression(data, target_column):
     # 5x Cross-Validation
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     cross_val_scores = cross_val_score(est_gp, X, y, cv=kf, scoring='neg_mean_squared_error')
+    cross_val_r2_scores = cross_val_score(est_gp, X, y, cv=kf, scoring='r2')
     cross_val_mse = -1 * np.mean(cross_val_scores)
+
     print(f'5x Cross-Validation Mean Squared Error: {cross_val_mse}')
+    print(f'5x Cross-Validation R2 Score: {np.mean(cross_val_r2_scores)}')
+
 
     # Plot In-Sample predicted vs actual
     plt.scatter(y, y_in_sample_pred, edgecolor='k', facecolor='none', alpha=0.7)
@@ -99,12 +103,12 @@ def run_all_datasets():
     # Seoul Bike Sharing dataset
     print("\nSeoul Bike Sharing Dataset")
     seoul_bike_data = seoul_bike.get_dataset()
-    symbolic_regression(seoul_bike_data, target_column='rented_bike_count')  # Example target column for Seoul bike
+    symbolic_regression(seoul_bike_data, target_column='Rented Bike Count')  # Example target column for Seoul bike
 
     # Boston Housing dataset
     print("\nBoston Housing Dataset")
     boston_data = boston.get_dataset()
-    symbolic_regression(boston_data, target_column='medv')  # Example target column for Boston dataset
+    symbolic_regression(boston_data, target_column='MEDV')  # Example target column for Boston dataset
 
 # Run symbolic regression on all datasets
 run_all_datasets()

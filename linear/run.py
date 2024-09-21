@@ -34,29 +34,29 @@ def run_auto_mpg():
     x, y = feature_auto_mpg()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     lr = linear_regression_model(x_train, x_test, y_train, y_test)
-    cv_rmse = cross_validation_scores(lr, x, y)
-    print("Cross-Validation RMSE:", cv_rmse)
+    result = cross_validation_scores(lr, x, y)
+    print(result)
 
 def run_forest_fires():
     x, y = feature_forest_fires()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     lr = linear_regression_model(x_train, x_test, y_train, y_test)
-    cv_rmse = cross_validation_scores(lr, x, y)
-    print("Cross-Validation RMSE:", cv_rmse)
+    result = cross_validation_scores(lr, x, y)
+    print(result)
 
 def run_seoul_bike():
     x, y = feature_seoul_bike()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     lr = linear_regression_model(x_train, x_test, y_train, y_test)
-    cv_rmse = cross_validation_scores(lr, x, y)
-    print("Cross-Validation RMSE:", cv_rmse)
+    result = cross_validation_scores(lr, x, y)
+    print(result)
 
 def run_boston_housing():
     x, y = feature_boston_housing()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     lr = linear_regression_model(x_train, x_test, y_train, y_test)
-    cv_rmse = cross_validation_scores(lr, x, y)
-    print("Cross-Validation RMSE:", cv_rmse)
+    result = cross_validation_scores(lr, x, y)
+    print("Cross Validation", result)
 
 def main():
     print("Auto MPG Linear Regression Results:")

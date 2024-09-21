@@ -1,6 +1,7 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
-from sklearn.metrics import r2_score, mean_squared_error, mean_squared_log_error, explained_variance_score, \
-    median_absolute_error, mean_absolute_error
+from sklearn.metrics import r2_score, mean_squared_error
 
 def get_r2_score(y_true, y_pred):
     return r2_score(y_true=y_true, y_pred=y_pred)
@@ -21,3 +22,13 @@ def get_all(y_true, y_pred):
         'R²': f"{r2:.5f}",
         'RMSE': rmse,
     }
+
+def predvactual(y_test, y_test_pred, model_name):
+    plt.figure(figsize=(12, 8))
+    sns.scatterplot(x=y_test, y=y_test_pred, color="orange")
+    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], '--', color='pink')
+    plt.ylabel('Predicted')
+    plt.xlabel('Actual')
+    plt.title(f'{model_name} - Predicted vs Actual')
+    plt.show()
+

@@ -10,6 +10,7 @@ from scipy import stats
 import matplotlib.pyplot as plt
 import seaborn as sns
 from regression import ridge_regression_model
+from ridge.regression import cross_validation_scores
 
 
 def feature_auto_mpg():
@@ -41,21 +42,29 @@ def run_auto_mpg():
     x, y = feature_auto_mpg()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     ridge_model = ridge_regression_model(x_train, x_test, y_train, y_test)
+    results = cross_validation_scores(ridge_model, x, y)
+    print("Cross Validation Scores", results)
 
 def run_forest_fires():
     x, y = feature_forest_fires()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     ridge_model = ridge_regression_model(x_train, x_test, y_train, y_test)
+    results = cross_validation_scores(ridge_model, x, y)
+    print("Cross Validation Scores", results)
 
 def run_seoul_bike():
     x, y = feature_seoul_bike()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     ridge_model = ridge_regression_model(x_train, x_test, y_train, y_test)
+    results = cross_validation_scores(ridge_model, x, y)
+    print("Cross Validation Scores", results)
 
 def run_boston_housing():
     x, y = feature_boston_housing()
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     ridge_model = ridge_regression_model(x_train, x_test, y_train, y_test)
+    results  = cross_validation_scores(ridge_model, x, y)
+    print("Cross Validation Scores", results)
 
 def main():
     print("Auto MPG Dataset Ridge Regression Results:")
