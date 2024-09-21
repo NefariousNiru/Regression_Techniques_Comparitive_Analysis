@@ -87,6 +87,7 @@ def run_boston_housing():
     execute(forest_fires_data_no_outliers_iq, 'MEDV')
 
 
+# Calls each dataset and performs regression
 def run():
     run_auto_mpg()
     run_forest_fires()

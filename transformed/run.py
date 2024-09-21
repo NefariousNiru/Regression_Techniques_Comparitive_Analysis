@@ -14,7 +14,7 @@ def get_data(data, y):
     X_train, X_test, y_train, y_test =  train_test_split(X, y, test_size=0.2, random_state=42)
     return X, y, X_train, X_test, y_train, y_test
 
-
+# Performs validations and runs the regression
 def execute(data, y_label):
     results = {}
 
@@ -90,6 +90,7 @@ def run_boston_housing():
     execute(forest_fires_data_no_outliers_iq, 'MEDV')
 
 
+# Calls all the regression methods on each dataset
 def run():
     run_auto_mpg()
     run_forest_fires()
